@@ -1,0 +1,165 @@
+;>>BASE INFORMATIONS
+name = Personal
+	;base theme = Framework
+description = My first personal website theme.
+core = 7.x
+engine = phptemplate
+	;screenshot = screenshot.png
+
+;>>CSS
+stylesheets[all][] = assets/css/style.css
+
+;>>JS
+	;scripts[] = assets/js/script.js
+
+;>>Information added by drupal.org packaging script on 2011-11-02
+	;version = "7.x-3.6"
+	;core = "7.x"
+	;project = "framework"
+	;datestamp = "1320214533"
+
+;>>GLOBAL THEME SETTINGS
+	;features[] = logo		
+	;				look for a file named log.png in the root of the theme directory
+	;				page.tpl.php: $logo is the path
+	;features[] = favicon
+	;				small icon in the address
+	;				default: misc/favicon.ico 
+	;features[] = name
+	;				page.tpl.php: $site_name
+	;features[] = slogan
+	;				page.tpl.php: $site_slogan 
+	;features[] = node_user_picture
+	;				node.tpl.php: $user_picture
+	;features[] = comment_user_picture
+	;				comment.tpl.php: $picture
+	;features[] = comment_user_verification
+	;				name for users, that do not have verified account
+	;				defined in template_prerocess_username()
+	;				printed in theme_username() as $variables['extra']
+	;features[] = main_menu
+	;				page.tpl.php: $main_menu
+	;				using theme_links() function
+	;features[] = secondary_menu
+	;				page.tpl.php: $secondary_menu
+	;				using theme_links() function
+
+
+;>>REGIONS
+;DEFAULT REGIONS
+	;chronologic order:
+	;1. regions[page_top]
+	;2. regions[header]
+	;3. regions[highlighted]
+	;4. regions[help]
+	;5. regions[content]
+	;6. regions[sidebar_first]
+	;7. regions[sidebar_second]
+	;8. regions[footer]
+	;9. regions[page_bottom]
+
+
+
+;HIDDEN REGIONS
+	;regions_hidden[] = the_region_name;
+
+;CORE REGIONS - DISABLED
+	;regions[highlighted]    = Highlighted
+	;regions[help]           = Help
+
+
+;CORE REGIONS - REQUIRED
+regions[page_top] 		= Page Top
+regions[page_bottom] 	= Page Bottom
+regions[header]         = Header
+regions[social]			= Social Icons
+;regions[slideshow]      = Slideshow
+regions[content]        = Content
+regions[sidebar]        = Sidebar
+regions[main_menu]      = Main menu
+regions[footer]         = Footer
+
+
+;CORE REGIONS
+	;regions[sidebar_first]  = First Sidebar
+	;regions[sidebar_second] = Second Sidebar
+
+;CUSTOM REGIONS
+	;regions[my_custom_region] = My Custom Region
+	;regions[navigation]     = Navigation
+
+;DEFINE CUSTOM REGIONS
+	;1. define regions in the .info file
+	;2. print regions int thE page.tpl.php template file
+
+;>>COMMON CORE TEMPLATES
+	;1. html.tpl.php: 		print the structure of the HTML document
+	;						<head>		$scripts,$styles
+	;						<body>		$page_top, $page, $page_bottom
+	;2. page.tpl.php:		prints the page level regions
+	;						full control of the site layout is possible by manipulating this file
+	;						$logo, $site_name, $tabs, $main_menu,...
+	;3. region.tpl.php:		prints the HTML markup for regions	
+	;4. block.tpl.php:		prints the HTML markup for blocks
+	;5. node.tpl.php:		prints the HTML markup for nodes
+	;6. comment.tpl.php:	prints the HTML markup for comments
+	;7. field.tpl.php:		prints the HTML markup for fields
+
+;>>TEMPLATE VARIABLES
+	;GLOBAL
+	;$is_admin				is admin logged in? 
+	;$logged_in				is current user logged in?
+	;$is_front				is the current page front page of the site
+	;$directory				the directory in which the template bein used is located
+	;$user					currently logged in user
+	;						INSECURE!!!
+	;						instead: 	theme('username')
+	;						example:	theme('username',array('account' => $user))
+	;$language				
+	;$theme_hook_suggestions	any array containing other possible theme hooks, which can be used as variants for naming template files and theme funcions or to determine context
+	;$title prefix			render arrays containing elements, such as contextual links
+	;$title_suffix
+
+;>>HTML ATTRIBUTES
+	;$attributes			contains HTML attributes pfovided by modules (pl. RDF), except for the class attributes
+	;						available as $attributes_array in preprocess, is usually reserved for the top-level HTML wrapper element (<body>, <div>) in other templates footer
+	;$classes				contains HTML classes for templates, reserved for the top-level HTML wrapper element
+	;$title_attributes		contains classes for the top-level heading (<h2> or block content)
+	;$content_attributes	contains classes for the content wrapper <div> or post body of templates (node.tpl.php file)
+
+;>>THEME FUNCTIONS
+	;all php code in template.php file (.tpl.php -> structure)
+	;generate HTML markup
+	;example:	THEME_links()		default implementation
+	;			THEME_links_node()	only applies to links lists indside of nodes
+
+	;always use theme() function to generate theme output
+	;example:
+	;	wrong way: 		theme_image(array('path' => 'path/to/image.png', 'alt' => 'Image description'))
+	;	correct way:	theme('image', array('path' => 'path/to/image.png', 'alt' => 'Image description'))
+
+;OVERRIDING THEME FUNCTIONS
+	;overridable funcions location: \htdocs\drupal\modules\system
+	;overrided functions			template.php
+	;	1. find original theme function or http://api.drupal.org
+	;	2. copy original function into template.php
+	;	3. change the beginning function name: theme -> mytheme
+	;	4. save and clear site cache 
+
+;>>THEME HOOKS
+	;refer to template files and functions 
+	;template files slower --> theme functions smaller bits of markup (example form input elements)
+	;theme functions:	smaller bits of markup (example form input elements)
+	;template files:	larger chunks (example nodes, blocks)
+		;sorrend block-oknál
+			;1. block--module-id.tpl.php	(block-block-1.tpl.php)	: 1-es azonosítójú, kézzel létrehozott blockra vonatkozik 
+			;2. block--module.tpl.php	(block-views.tpl.php)	: minden Views modul által generált blokk
+			;3. block--region.tpl.php	(block-sidebar_first.tpl.php):	minden sidebar_first régióban tlálható
+		;sorrend node-oknál
+			;1. node--nodeid.tpl.php
+			;2. node--type.tpl.php
+			;3. node.tpl.php
+		
+;>>THEME SUGGESTIONS: 	https://www.drupal.org/node/1089656
+	;elérési útvonal alapján felülírható template
+	;override: simply changing the name of the template file
